@@ -1,0 +1,77 @@
+id lets you see the current user info (username, group, and groups)
+
+443 for HTTPS, 80 for HTTP
+
+VPS = virtual private server
+
+
+Nmap/Netstat tutorial: https://www.digitalocean.com/community/tutorials/how-to-use-nmap-to-scan-for-open-ports
+
+Ports are a transport layer thing in the OSI model
+
+
+    Port: An addressable network location implemented inside of the operating system that helps distinguish traffic destined for different applications or services.
+
+    Internet Sockets: A file descriptor that specifies an IP address and an associated port number, as well as the transfer protocol that will be used to handle the data.
+
+    Binding: The process that takes place when an application or service uses an internet socket to handle the data it is inputting and outputting.
+
+    Listening: A service is said to be “listening” on a port when it is binding to a port/protocol/IP address combination in order to wait for requests from clients of the service.
+
+Ports go from 1 to 65535
+
+    20: FTP data
+    21: FTP control port
+    22: SSH
+    23: Telnet (Insecure, not recommended for most uses)
+    25: SMTP
+    43: WHOIS protocol
+    53: DNS services
+    67: DHCP server port
+    68: DHCP client port
+    80: HTTP - Unencrypted Web traffic
+    110: POP3 mail port
+    113: Ident authentication services on IRC networks
+    143: IMAP mail port
+    161: SNMP
+    194: IRC
+    389: LDAP port
+    443: HTTPS - Secure web traffic
+    587: SMTP - message submission port
+    631: CUPS printing daemon port
+    666: DOOM - This legacy game actually has its own special port
+
+From Wikipedia:
+The use of the term socket in software is analogous to the function of an electrical female connector,
+a device in hardware for communication between nodes interconnected with an electrical cable. Similarly, the term port is used for external physical endpoints at a node or device.
+
+The application programming interface (API) for the network protocol stack creates a handle for each
+socket created by an application, commonly referred to as a socket descriptor. In Unix-like operating systems, this descriptor is a type of file descriptor.
+It is stored by the application process for use with every read and write operation on the communication channel. 
+
+At the time of creation with the API, a network socket is bound to the combination of a type of network protocol to be used for transmissions,
+a network address of the host, and a port number. Ports are numbered resources that represent another type of software structure of the node.
+They are used as service types, and, once created by a process, serve as an externally (from the network) addressable location component, so that other hosts may establish connections. 
+
+------------
+
+$ sudo netstat -plunt
+
+there's a test server for nmap at scanme.nmap.org
+
+Reverse DNS = looking up DNS name for given IP
+
+nmap = port scanner and security utility
+
+$ nmap -sT <IP address> # scans for TCP connections
+
+
+FROM TUTORIAL
+-------------
+A TCP “SYN” scan exploits the way that TCP establishes a connection.
+
+To start a TCP connection, the requesting end sends a “synchronize request” packet to the server. The server then sends a “synchronize acknowledgment” packet back. The original sender then sends back an “acknowledgment” packet back to the server, and a connection is established.
+
+A “SYN” scan, however, drops the connection when the first packet is returned from the server. This is called a “half-open” scan and used to be promoted as a way to surreptitiously scan for ports, since the application associated with that port would not receive the traffic, because the connection is never completed.
+
+This is no longer considered stealthy with the adoption of more advanced firewalls and the flagging of incomplete SYN request in many configurations
