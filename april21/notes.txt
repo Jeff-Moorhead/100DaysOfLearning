@@ -1,0 +1,51 @@
+Network interfaces: wl = WLAN, en = Ethernet
+
+---> FOR nc
+PORT SCANNING
+     It may be useful to know which ports are open and running services on a target machine.  The -z flag can be used to tell nc to report open ports, rather than initiate a connection. Usually it's useful to turn on verbose
+     output to stderr by use this option in conjunction with -v option.
+
+     For example:
+
+           $ nc -zv host.example.com 20-30
+           Connection to host.example.com 22 port [tcp/ssh] succeeded!
+           Connection to host.example.com 25 port [tcp/smtp] succeeded!
+
+     The port range was specified to limit the search to ports 20 - 30, and is scanned by increasing order (unless the -r flag is set).
+
+     You can also specify a list of ports to scan, for example:
+
+           $ nc -zv host.example.com http 20 22-23
+           nc: connect to host.example.com 80 (tcp) failed: Connection refused
+           nc: connect to host.example.com 20 (tcp) failed: Connection refused
+           Connection to host.example.com port [tcp/ssh] succeeded!
+           nc: connect to host.example.com 23 (tcp) failed: Connection refused
+
+
+20 -> 21 hint: $ echo -n hello | nc -l -p 1234 &  # pipe hello into TCP port 1234, then use ~/suconnect 1234 to read from that port
+nc is for arbitrary TCP and UDP connections
+
+nmap scans ports
+nc handles listening and connecting to TCP/UDP, but can also scan (Swiss Army Knife of networking)
+
+21 -> 22
+--------
+
+/etc/cron.d/ -> cron configurations
+
+
+22 -> 23
+--------
+
+#!/bin/bash
+
+myname=$(whoami)
+mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
+
+echo "Copying passwordfile /etc/bandit_pass/$myname to /tmp/$mytarget"
+
+cat /etc/bandit_pass/$myname > /tmp/$mytarget
+
+# This script converts 'I am user bandit22' into an MD5 checksum and uses the digest as a file name in /tmp to store the password for /etc/bandit_pass/bandit22
+
+cronjobs are programs running at regular internals
