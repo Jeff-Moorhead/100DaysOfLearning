@@ -34,3 +34,23 @@ Solution to Level 24 -> Level 25:
 
 # From shell:
 $ ./bandit25_pass.sh | nc localhost 30002
+
+
+ssh
+---
+
+Every user has a default shell -> ssh uses the default shell
+
+default shell is shown in /etc/passwd file
+
+
+WHAT WE KNOW IN 25 -> 26
+------------------------
+
+bandit26 uses /usr/bin/showtext for it's login shell (as seen in /etc/passwd)
+there is a file ~bandit26/text.txt that gets more'ed by this custom shell.
+the shell is viewable and executable by all users, but there needs to be a ~/text.txt present in the user's home directory.
+I can't touch new files into the home directory (permission denied), so I'm not sure how to run this shell
+
+
+TODO: add a user to my computer and toy with its default shell
