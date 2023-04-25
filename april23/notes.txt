@@ -1,0 +1,37 @@
+snap -> includes all requirements including dependencies and runs packages in sandbox environments
+    - Allows you to install multiple versions of the same package
+    Commands
+        $ snap install
+        $ snap list
+        $ snap refresh  # updates snaps
+        $ snap refresh --hold spotify  # stop automatic updates of spotify snap
+    
+    - By default, snapd looks for updates four times a day
+
+apt -> installs dependencies as separate .deb packages and runs directly on host system
+     - may leave cruft on system after package deletion
+
+
+User Management
+===============
+
+# This is to experiment with overthewire ideas
+$ sudo apt adduser
+
+tee allows you to pipe output into other users files as root (normal redirecting is not done as root so using sudo doesn't work)
+
+The last entry for the user in /etc/passwd is the default shell used for this user
+
+Solution to 25->26
+------------------
+
+Scale down your terminal window until `more` enters command mode (i.e. it can't fit the entire file in the window).
+Use the 'v' command in `more` to open the file in vim
+Use :e /etc/bandit_pass/bandit26 to open the password file for bandit26
+Set the shell FROM VIM using :set shell=/bin/bash
+Finally, open a shell from vim with :shell
+
+This was a hard one. This is what hacking is all about. Using the tools available to you in creative ways to exploit
+vulnerabilities.
+
+To see all users in the system (usernames only): `cut -d : -f 1 /etc/passwd`
