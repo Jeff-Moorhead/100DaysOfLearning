@@ -1,0 +1,3 @@
+To clone a git repo using port 2220 over ssh: git clone ssh://bandit27-git@bandit.labs.overthewire.org:2220/home/bandit27-git/repo
+
+To get to level 29, we have to checkout a previous commit that had the password in plain text. HEAD hides the password.
